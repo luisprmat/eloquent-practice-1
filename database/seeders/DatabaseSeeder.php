@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $posts = Post::factory()->count(20)->create();
 
-        for ($i = 1; $i < 50; $i++) {
+        for ($i = 1; $i < 150; $i++) {
             PostLike::factory()->create([
                 'post_id' => $posts->random()->id
             ]);
