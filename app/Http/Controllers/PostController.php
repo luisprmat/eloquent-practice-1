@@ -12,12 +12,13 @@ class PostController extends Controller
         // Post select title, likes count grouped by date(created_at)
         //   ordered by date(created_at) desc
 
-        $posts = Post::selectRaw('id, title, DATE(created_at) as created_date')
+        $dates = Post::selectRaw('id, title, DATE(created_at) as created_date')
             ->withCount('likes')
             ->orderBy('created_date', 'desc')
             ->orderBy('likes_count', 'desc')
-            ->get();
+            ->get()
+            ->groupBy('created_date');
 
-        return view('posts', compact('posts'));
+        return view('posts', compact('dates'));
     }
 }
