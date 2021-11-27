@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
+use App\Models\PostLike;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $posts = Post::factory()->count(20)->create();
+
+        for ($i = 1; $i < 50; $i++) {
+            PostLike::factory()->create([
+                'post_id' => $posts->random()->id
+            ]);
+        }
     }
 }
